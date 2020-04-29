@@ -1,0 +1,22 @@
+[PROJECT]
+Target=gr8_CodeC.hex
+Processor_Text=PIC18F458
+CCSVerions=5.008
+Compiler=PCH
+CCSVersion=5.008
+[Target Data]
+FileList=gr8_CodeC.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\robin\Documents\GitHub\ProjetElectronique2TIG8\CodeC\
+[C:\Users\robin\Documents\GitHub\ProjetElectronique2TIG8\CodeC\gr8_CodeC]
+Type=4
+[mru-list]
+1=gr8_CodeC.c
+[Opened Files]
+1=gr8_CodeC.c
+2=
+[gr8_CodeC.c]
+Type=4
+[Units]
+Count=1
+1=gr8_CodeC (main)

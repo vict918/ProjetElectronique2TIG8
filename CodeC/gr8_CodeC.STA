@@ -1,0 +1,59 @@
+
+ROM used:   1834/16384 (6%)
+            1834/16384 (6%) including unused fragments
+
+            2.0 Average locations per line
+            37.4 Average locations per statement
+
+RAM used:   27/1536 (2%) at main() level
+            87/1536 (6%) worst case
+
+Stack used: 5 worst case (2 in main + 3 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+  120    49 100  gr8_CodeC.c
+   12     0   0  gr8_CodeC.h
+  766     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h
+----- -----
+  898    49 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     38   1    1             @delay_ms1
+0     64   2    1             @PUTCHAR_1_
+0     72   2    1             @GETCH_1_
+0     24   1    0    24  1.5  RDA_isr
+0    204   6    1   574  4.1  MAIN
+0    142   4   13             @DIV3232
+0    166   5   12             @PRINTF_L32U_629
+0    360  10   18   797 10.6  lecture
+0     84   2   14             @MUL3232
+0    170   5    8   282  3.6  dist
+0     56   2    2             @ITOF
+0    244   7   11             @MULFF
+0     64   2    5             @FTOSD
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               4
+    Statements              49
+    Comments                196
+    Volume (V)              2175
+    Difficulty (D)          18.6
+    Effort to implement (E) 40438
+    Time to implement (T)   37 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   4
+    Maintainability (MI)    48
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-00094   142  0  
+00096-07FFE  1688  30930  
+
+
+

@@ -1,0 +1,20 @@
+ÀÄgr8_CodeC
+   ÃÄMAIN  0/204  Ram=1
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄ@delay_ms1  0/38  Ram=1
+   ³  ÃÄdist  0/170  Ram=8
+   ³  ³  ÃÄ@ITOF  0/56  Ram=2
+   ³  ³  ÃÄ@MULFF  0/244  Ram=11
+   ³  ³  ÀÄ@FTOSD  0/64  Ram=5
+   ³  ÃÄ@PRINTF_L32U_629  0/166  Ram=12
+   ³  ³  ÃÄ@DIV3232  0/142  Ram=13
+   ³  ³  ÃÄ@PUTCHAR_1_  0/64  Ram=1
+   ³  ³  ÀÄ@DIV3232  0/142  Ram=13
+   ³  ÃÄ@PUTCHAR_1_  0/64  Ram=1
+   ³  ÃÄ@PUTCHAR_1_  0/64  Ram=1
+   ³  ÀÄ@delay_ms1  0/38  Ram=1
+   ÀÄRDA_isr  0/24  Ram=0
+      ÀÄlecture  0/360  Ram=18
+         ÃÄ@GETCH_1_  0/72  Ram=1
+         ÃÄ@MUL3232  0/84  Ram=14
+         ÀÄ@MUL3232  0/84  Ram=14
