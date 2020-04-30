@@ -1,0 +1,97 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     @INTERRUPT_AREA
+005     @INTERRUPT_AREA
+006     @INTERRUPT_AREA
+007     @INTERRUPT_AREA
+008     @INTERRUPT_AREA
+009     @INTERRUPT_AREA
+00A     @INTERRUPT_AREA
+00B     @INTERRUPT_AREA
+00C     @INTERRUPT_AREA
+00D     @INTERRUPT_AREA
+00E     @INTERRUPT_AREA
+00F     @INTERRUPT_AREA
+010     @INTERRUPT_AREA
+011     @INTERRUPT_AREA
+012     @INTERRUPT_AREA
+013     @INTERRUPT_AREA
+014     @INTERRUPT_AREA
+015     @INTERRUPT_AREA
+016     @INTERRUPT_AREA
+02E-031 main.distance
+032-035 dist.time
+032     main.@SCRATCH1
+033     @delay_ms1.P1
+036-039 dist.distance
+03A-03D @MULFF.P1
+03A-03D @FTOSD.P2
+03A-03B @ITOF.P3
+03E-041 @MULFF.P1
+03E     @FTOSD.@SCRATCH1
+042     @MULFF.@SCRATCH1
+043     @MULFF.@SCRATCH2
+044     @MULFF.@SCRATCH3
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+000096  @delay_ms1
+0000BC  @ITOF
+0000F2  @MULFF
+0001E4  @FTOSD
+000222  dist
+0002CA  main
+0002CA  @cinit1
+0002E8  @cinit2
+
+Project Directory:
+    C:\Users\robin\Documents\GitHub\ProjetElectronique2TIG8\CodeC\
+
+Project Files:
+    main.c                                                  [30-avr.-20 16:40  CRC=8474680F]
+    ..\..\..\..\Desktop\c\main.h                            [02-avr.-18 15:50  CRC=6CEB0DF0]
+    ..\..\..\..\Desktop\testCodeC\18F458.h                  [05-mars-20 15:47  CRC=1AB1DF0F]
+
+Source signature=26C3341D
+
+Units:
+    main (main)
+
+Compiler Settings:
+    Processor:      PIC18F458
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   main.xsym
+    Errors:      main.err
+    Ext Symbols: main.esym
+    INHX32:      main.hex
+    Symbols:     main.sym
+    List:        main.lst
+    Debug/COFF:  main.cof
+    Project:     main.ccspjt
+    Call Tree:   main.tre
+    Statistics:  main.STA

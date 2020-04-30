@@ -1,0 +1,128 @@
+#include <main.h>
+
+
+
+
+#use delay(clock = 8000000)
+ 
+unsigned int8 count;
+unsigned int16 i, distance;
+#INT_TIMER0
+void timer0_isr(){
+  count++;
+  clear_interrupt(INT_TIMER0);
+}
+int1 wait_sensor(){
+  i = 0;
+  set_timer0(0);
+  count = 0;                             // Reset Timer0
+  while(!input(PIN_B3) && (i < 1000))
+    i = count * 256 + get_timer0();
+  if(i > 990)
+    return 0;
+  else
+    return 1;
+}
+unsigned int16 get_distance(){
+  i = 0;
+  set_timer0(0);
+  count = 0;
+  while(input(PIN_B3) && (i < 25000))
+    i = count * 256 + get_timer0();
+  return i;
+}
+void main(){
+  output_a(0);
+  set_tris_a(2); //4                                     // Configure RA1 as input
+                                  
+  clear_interrupt(INT_TIMER0);
+  enable_interrupts(GLOBAL);
+  enable_interrupts(INT_TIMER0);
+  setup_timer_0 (T0_INTERNAL | T0_DIV_2);             // Configure Timer0 module
+  
+  while(TRUE){
+    // Send 10us pulse to HC-SR04 Trigger pin
+    output_high(PIN_B7);
+    delay_us(10);
+    output_low(PIN_B7);
+    // Read pulse comes from HC-SR04 Echo pin
+    if(true) {
+      distance = get_distance();
+      if(distance > 24990) {
+        output_d(0x99);
+      }
+      else {
+        distance = i/58;                              // Calculate the distance
+        output_d(distance);
+      }
+    }
+    else {
+      output_d(0x01);
+    }
+  delay_ms(100);
+  }
+}
+
+
+
+
+
+
+
+/*
+int32 lecture(void);
+int32 dist(void);
+
+#INT_RDA
+
+
+
+void main(){
+   output_high(PIN_B0);
+   output_high(PIN_B1);
+   #define toint(c) ((c & 0x5F) > '9' ? c - '7' : c - '0') //conversion d'un char en int (0,9)
+   setup_timer_0(RTCC_INTERNAL); // 409us (us = microseconde) overflow
+   setup_timer_1(T1_INTERNAL); //13,1 ms overflow
+   enable_interrupts(GLOBAL);
+   setup_low_volt_detect(FALSE);
+   enable_interrupts(INT_RDA);
+   enable_interrupts(GLOBAL);
+   delay_ms(100); //délai initialisation
+   output_low(PIN_B0);
+   output_low(PIN_B1);
+   int32 distance=0;
+   
+   while(true){
+      distance = dist(); //calcul de la distance
+      if(distance<100){ //si la distance est assez grande
+         output_low(PIN_B0); //si la sortie est basse led rouge
+         output_high(PIN_B1); //si la sortie est haute led verte
+         output_low(PIN_E0);
+      }else{
+         output_low(PIN_B1); //vérifie que la led verte est bien éteinte
+         output_toggle(PIN_B0); //la led rouge clignote
+         output_high(PIN_E0);
+      }
+      output_d(distance);
+      
+      delay_ms(300);
+   }
+}
+
+int32 dist(){
+   float time=0;
+   int32 distance=0;
+   output_high(pin_b7); //début de l’impulsion sur le trigger de la sonde à ultrasons
+   delay_us(20);
+   output_low(pin_b7); //fin de l’impulsion
+   
+   while(!input(PIN_b3)); //tant que la pin b3/canrx du PIC est à low => reliée au echo de la sonde
+   set_timer1(0); //mise à zéro du timer 1
+   
+   while(input(PIN_b3)); //tant que la pin b3/canrx du PIC est à high
+   time=get_timer1(); //récupération du timer
+   distance = (time*340)/10000;
+   distance = time*0.00344; //calcul de la distance
+   return distance;
+}
+*/
