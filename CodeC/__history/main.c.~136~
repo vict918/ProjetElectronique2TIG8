@@ -29,11 +29,11 @@ int conversion (int Decimal)
    int binaire=0;
    
    
-   valeur = Decimal; //32
+   valeur = Decimal;
    
    while (valeur > 0)
    {
-      reste = valeur%2 ;//calcul le reste //16
+      reste = valeur%2 ;//calcul le reste
       tab[x] = reste;
       x++;
       valeur = valeur/2;
@@ -80,18 +80,16 @@ void main(){
             output_d(distance);
             delay_ms(300);
          }
-         /*
-         else{ //32
-            distance = conversion(distance);
+         if (distance > 9){
+            //distance = conversion(distance);
             output_low(PIN_E0);
             output_d(distance);
-            delay_ms(300);
+            delay_ms(300)
          }
-         */
-         output_low(PIN_E0);
-            output_d(distance);
-            delay_ms(300);
          
+         output_low(PIN_E0);
+         output_d(distance);
+         delay_ms(300);
       }else{
          output_high(PIN_E0); //dist = 155
          int diz = distance/100; //1.55

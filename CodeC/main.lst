@@ -1,9 +1,9 @@
-CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 17:59
+CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 18:25
 
                Filename:   C:\Users\robin\Documents\GitHub\ProjetElectronique2TIG8\CodeC\main.lst
 
-               ROM used:   988 bytes (3%)
-                           Largest free fragment is 31780
+               ROM used:   1030 bytes (3%)
+                           Largest free fragment is 31738
                RAM used:   8 (1%) at main() level
                            29 (2%) worst case
                Stack used: 2 locations
@@ -386,6 +386,32 @@ CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 17:59
 023C:  GOTO   031C (RETURN)
 .................... } 
 ....................  
+.................... int conversion (int Decimal) 
+.................... { 
+....................    int valeur; 
+....................    int tab[15]; 
+....................    int x=0; 
+....................    int i; 
+....................    int reste; 
+....................    int binaire=0; 
+....................     
+....................     
+....................    valeur = Decimal; //32 
+....................     
+....................    while (valeur > 0) 
+....................    { 
+....................       reste = valeur%2 ;//calcul le reste //16 
+....................       tab[x] = reste; 
+....................       x++; 
+....................       valeur = valeur/2; 
+....................    } 
+....................    for(i=x;i--;i>0) 
+....................    { 
+....................       binaire = binaire + tab[i]*10^i; 
+....................    } 
+....................    return binaire ; 
+....................    } 
+....................  
 .................... void main(){ 
 *
 02CE:  CLRF   FF8
@@ -459,98 +485,132 @@ CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 17:59
 ....................          output_toggle(PIN_B0); //la led rouge clignote 
 ....................       } 
 ....................       */ 
-....................       if(distance <= 153){ //154(base 16) == 100(base 10) 
+....................       if(distance <= 99){ 
 032C:  MOVF   08,F
-032E:  BNZ   0358
+032E:  BNZ   0382
 0330:  MOVF   07,F
-0332:  BNZ   0358
+0332:  BNZ   0382
 0334:  MOVF   06,F
-0336:  BNZ   0358
+0336:  BNZ   0382
 0338:  MOVF   05,W
-033A:  SUBLW  99
-033C:  BNC   0358
+033A:  SUBLW  63
+033C:  BNC   0382
+....................          if(distance <= 9){ 
+033E:  MOVF   08,F
+0340:  BNZ   0368
+0342:  MOVF   07,F
+0344:  BNZ   0368
+0346:  MOVF   06,F
+0348:  BNZ   0368
+034A:  MOVF   05,W
+034C:  SUBLW  09
+034E:  BNC   0368
+....................             output_low(PIN_E0); 
+0350:  BCF    F96.0
+0352:  BCF    F8D.0
+....................             output_d(distance); 
+0354:  CLRF   F95
+0356:  MOVFF  05,F8C
+....................             delay_ms(300); 
+035A:  MOVLW  02
+035C:  MOVWF  0B
+035E:  MOVLW  96
+0360:  MOVWF  0C
+0362:  RCALL  0004
+0364:  DECFSZ 0B,F
+0366:  BRA    035E
+....................          } 
+....................          /* 
+....................          else{ //32 
+....................             distance = conversion(distance); 
+....................             output_low(PIN_E0); 
+....................             output_d(distance); 
+....................             delay_ms(300); 
+....................          } 
+....................          */ 
 ....................          output_low(PIN_E0); 
-033E:  BCF    F96.0
-0340:  BCF    F8D.0
-....................          output_d(distance); 
-0342:  CLRF   F95
-0344:  MOVFF  05,F8C
-....................          delay_ms(300); 
-0348:  MOVLW  02
-034A:  MOVWF  0B
-034C:  MOVLW  96
-034E:  MOVWF  0C
-0350:  RCALL  0004
-0352:  DECFSZ 0B,F
-0354:  BRA    034C
+0368:  BCF    F96.0
+036A:  BCF    F8D.0
+....................             output_d(distance); 
+036C:  CLRF   F95
+036E:  MOVFF  05,F8C
+....................             delay_ms(300); 
+0372:  MOVLW  02
+0374:  MOVWF  0B
+0376:  MOVLW  96
+0378:  MOVWF  0C
+037A:  RCALL  0004
+037C:  DECFSZ 0B,F
+037E:  BRA    0376
+....................           
 ....................       }else{ 
-0356:  BRA    03D8
+0380:  BRA    0402
 ....................          output_high(PIN_E0); //dist = 155 
-0358:  BCF    F96.0
-035A:  BSF    F8D.0
+0382:  BCF    F96.0
+0384:  BSF    F8D.0
 ....................          int diz = distance/100; //1.55 
 ....................          int unit = (distance - (diz*100))/10; 
-035C:  BCF    FD8.1
-035E:  MOVFF  08,12
-0362:  MOVFF  07,11
-0366:  MOVFF  06,10
-036A:  MOVFF  05,0F
-036E:  CLRF   16
-0370:  CLRF   15
-0372:  CLRF   14
-0374:  MOVLW  64
-0376:  MOVWF  13
-0378:  RCALL  0240
-037A:  MOVFF  00,09
-037E:  MOVF   09,W
-0380:  MULLW  64
-0382:  MOVF   FF3,W
-0384:  SUBWF  05,W
-0386:  MOVWF  0B
-0388:  MOVLW  00
-038A:  SUBWFB 06,W
-038C:  MOVWF  0C
-038E:  MOVLW  00
-0390:  SUBWFB 07,W
-0392:  MOVWF  0D
-0394:  MOVLW  00
-0396:  SUBWFB 08,W
-0398:  MOVWF  0E
-039A:  BCF    FD8.1
-039C:  MOVWF  12
-039E:  MOVFF  0D,11
-03A2:  MOVFF  0C,10
-03A6:  MOVFF  0B,0F
-03AA:  CLRF   16
-03AC:  CLRF   15
-03AE:  CLRF   14
-03B0:  MOVLW  0A
-03B2:  MOVWF  13
-03B4:  RCALL  0240
-03B6:  MOVFF  00,0A
+0386:  BCF    FD8.1
+0388:  MOVFF  08,12
+038C:  MOVFF  07,11
+0390:  MOVFF  06,10
+0394:  MOVFF  05,0F
+0398:  CLRF   16
+039A:  CLRF   15
+039C:  CLRF   14
+039E:  MOVLW  64
+03A0:  MOVWF  13
+03A2:  RCALL  0240
+03A4:  MOVFF  00,09
+03A8:  MOVF   09,W
+03AA:  MULLW  64
+03AC:  MOVF   FF3,W
+03AE:  SUBWF  05,W
+03B0:  MOVWF  0B
+03B2:  MOVLW  00
+03B4:  SUBWFB 06,W
+03B6:  MOVWF  0C
+03B8:  MOVLW  00
+03BA:  SUBWFB 07,W
+03BC:  MOVWF  0D
+03BE:  MOVLW  00
+03C0:  SUBWFB 08,W
+03C2:  MOVWF  0E
+03C4:  BCF    FD8.1
+03C6:  MOVWF  12
+03C8:  MOVFF  0D,11
+03CC:  MOVFF  0C,10
+03D0:  MOVFF  0B,0F
+03D4:  CLRF   16
+03D6:  CLRF   15
+03D8:  CLRF   14
+03DA:  MOVLW  0A
+03DC:  MOVWF  13
+03DE:  RCALL  0240
+03E0:  MOVFF  00,0A
 ....................          output_d((diz<<4)+unit); 
-03BA:  SWAPF  09,W
-03BC:  MOVWF  00
-03BE:  MOVLW  F0
-03C0:  ANDWF  00,F
-03C2:  MOVF   00,W
-03C4:  ADDWF  0A,W
-03C6:  CLRF   F95
-03C8:  MOVWF  F8C
+03E4:  SWAPF  09,W
+03E6:  MOVWF  00
+03E8:  MOVLW  F0
+03EA:  ANDWF  00,F
+03EC:  MOVF   00,W
+03EE:  ADDWF  0A,W
+03F0:  CLRF   F95
+03F2:  MOVWF  F8C
 ....................          delay_ms(300); 
-03CA:  MOVLW  02
-03CC:  MOVWF  0B
-03CE:  MOVLW  96
-03D0:  MOVWF  0C
-03D2:  RCALL  0004
-03D4:  DECFSZ 0B,F
-03D6:  BRA    03CE
+03F4:  MOVLW  02
+03F6:  MOVWF  0B
+03F8:  MOVLW  96
+03FA:  MOVWF  0C
+03FC:  RCALL  0004
+03FE:  DECFSZ 0B,F
+0400:  BRA    03F8
 ....................       }       
-03D8:  BRA    031A
+0402:  BRA    031A
 ....................    } 
 .................... } 
 ....................  
-03DA:  SLEEP 
+0404:  SLEEP 
 ....................  
 
 Configuration Fuses:

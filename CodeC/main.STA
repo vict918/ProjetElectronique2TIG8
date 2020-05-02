@@ -1,9 +1,9 @@
 
-ROM used:   988/16384 (3%)
-            988/16384 (3%) including unused fragments
+ROM used:   1030/16384 (3%)
+            1030/16384 (3%) including unused fragments
 
-            1.2 Average locations per line
-            27.4 Average locations per statement
+            1.1 Average locations per line
+            19.8 Average locations per statement
 
 RAM used:   8/1536 (1%) at main() level
             29/1536 (2%) worst case
@@ -13,39 +13,39 @@ Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-   66    36 100  main.c
+  106    52 100  main.c
    26     0   0  ..\..\..\..\Desktop\c\main.h
   766     0   0  ..\..\..\..\Desktop\testCodeC\18F458.h
 ----- -----
-  858    36 Total
+  898    52 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
 0     38   2    1             @delay_ms1
-0    170   9    8   282  3.6  valeurDist
-0     56   3    2   282  3.6  @ITOF
-0    244  12   11   282  3.6  @MULFF
+0    170   8    8   282  3.6  valeurDist
+0     56   3    2             @ITOF
+0    244  12   11             @MULFF
 0     64   3    5             @FTOSD
-0    270  14    4   712  6.4  MAIN
+0    312  15    4   843  6.4  MAIN
 0    142   7   13             @DIV3232
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               4
-    Statements              36
-    Comments                153
-    Volume (V)              2106
-    Difficulty (D)          16.6
-    Effort to implement (E) 35063
-    Time to implement (T)   32 minutes
+    Functions               2
+    Statements              52
+    Comments                162
+    Volume (V)              1305
+    Difficulty (D)          9.4
+    Effort to implement (E) 12279
+    Time to implement (T)   11 minutes
     Est Delivered Bugs (B)  0
-    Cyclomatic Complexity   1
-    Maintainability (MI)    95
+    Cyclomatic Complexity   2
+    Maintainability (MI)    133
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00002     4  0  
-00004-07FFE   984  31780  
+00004-07FFE  1026  31738  
 
 
 

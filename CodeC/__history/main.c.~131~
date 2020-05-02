@@ -19,31 +19,31 @@ int32 valeurDist(){
    return dist;
 }
 
-int conversion (int Decimal)
+int conversion (int unsigned short Decimal)
 {
-   int valeur;
-   int tab[15];
-   int x=0;
-   int i;
-   int reste;
-   int binaire=0;
-   
-   
-   valeur = Decimal; //32
-   
-   while (valeur > 0)
-   {
-      reste = valeur%2 ;//calcul le reste //16
-      tab[x] = reste;
-      x++;
-      valeur = valeur/2;
-   }
-   for(i=x;i--;i>0)
-   {
-      binaire = binaire + tab[i]*10^i;
-   }
-   return binaire ;
-   }
+int unsigned short valeur;
+int tab[15];
+int x=0;
+int i;
+int reste;
+int binaire=0;
+
+
+valeur = Decimal;
+
+while (valeur > 0)
+{
+reste = valeur%2 ;//calcul le reste
+tab[x] = reste;
+x++;
+valeur = valeur/2;
+}
+for(i=x;i--;i>0)
+{
+binaire = binaire + tab[i]*10^i;
+}
+return binaire ;
+}
 
 void main(){
    output_high(PIN_B0);
@@ -80,18 +80,10 @@ void main(){
             output_d(distance);
             delay_ms(300);
          }
-         /*
-         else{ //32
-            distance = conversion(distance);
-            output_low(PIN_E0);
-            output_d(distance);
-            delay_ms(300);
-         }
-         */
-         output_low(PIN_E0);
-            output_d(distance);
-            delay_ms(300);
          
+         output_low(PIN_E0);
+         output_d(distance);
+         delay_ms(300);
       }else{
          output_high(PIN_E0); //dist = 155
          int diz = distance/100; //1.55

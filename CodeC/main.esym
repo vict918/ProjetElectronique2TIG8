@@ -1,8 +1,8 @@
 d G "INT_CANRX0" 2 763 "0x00A301"
-D G "__PCH__" 0 67 ""5.008""
-D G "__DEVICE__" 0 67 "458"
-D G "__DATE__" 0 67 ""02-mai-20""
-D G "__TIME__" 0 67 ""17:59:14"" "Standard Header file for the PIC18F458 device ////////////////"
+D G "__PCH__" 0 102 ""5.008""
+D G "__DEVICE__" 0 102 "458"
+D G "__DATE__" 0 102 ""02-mai-20""
+D G "__TIME__" 0 102 ""18:25:53"" "Standard Header file for the PIC18F458 device ////////////////"
 c L "set_tris_a" 2 5 16 "FUNCTION"
 v L "value" 2 31 "int8" `54 
 f B "set_tris_a" 2 31 "void(int8 value)" `53 
@@ -872,17 +872,27 @@ C L "valeurDist" 0 7 1 "FUNCTION"
 C L "valeurDist" 0 7 1 "FUNCTION"
 C L "valeurDist" 0 7 1 "FUNCTION"
 C L "valeurDist" 0 7 2 "FUNCTION"
-F G "MAIN" 0 22 "void()" `642 
+V L "Decimal" 0 22 "int8" `643 
+F G "conversion" 0 23 "int8(int8 Decimal)" `642 
+V L "valeur" 0 24 "int8" `644 
+V L "tab" 0 25 "int8[15]" `645 
+V L "x" 0 26 "int8" `646 
+V L "i" 0 27 "int8" `647 
+V L "reste" 0 28 "int8" `648 
+V L "binaire" 0 29 "int8" `649 
+C L "conversion" 0 7 1 "FUNCTION"
+C L "conversion" 0 7 1 "FUNCTION"
+F G "MAIN" 0 48 "void()" `650 
 C L "MAIN" 0 7 1 "FUNCTION"
 C L "MAIN" 0 7 1 "FUNCTION"
 C L "MAIN" 0 7 1 "FUNCTION"
-V L "distance" 0 37 "int32" `645 
+V L "distance" 0 63 "int32" `653 
 C L "MAIN" 0 7 7 "FUNCTION"
+C L "MAIN" 0 7 5 "FUNCTION"
 C L "MAIN" 0 7 1 "FUNCTION"
+V L "diz" 0 97 "int8" `654 
 C L "MAIN" 0 7 1 "FUNCTION"
-V L "diz" 0 57 "int8" `646 
-C L "MAIN" 0 7 1 "FUNCTION"
-V L "unit" 0 58 "int8" `650 
+V L "unit" 0 98 "int8" `658 
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 0
