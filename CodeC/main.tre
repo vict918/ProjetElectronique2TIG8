@@ -1,8 +1,8 @@
 ÀÄmain
-   ÀÄmain  0/270  Ram=4
+   ÀÄMAIN  0/270  Ram=4
       ÃÄ@cinit1  (Inline)  Ram=0
       ÃÄ@delay_ms1  0/38  Ram=1
-      ÃÄdist  0/170  Ram=8
+      ÃÄvaleurDist  0/170  Ram=8
       ³  ÃÄ@ITOF  0/56  Ram=2
       ³  ÃÄ@MULFF  0/244  Ram=11
       ³  ÀÄ@FTOSD  0/64  Ram=5

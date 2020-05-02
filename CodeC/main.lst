@@ -1,4 +1,4 @@
-CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 16:04
+CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 17:59
 
                Filename:   C:\Users\robin\Documents\GitHub\ProjetElectronique2TIG8\CodeC\main.lst
 
@@ -304,16 +304,88 @@ CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 16:04
 .................... #use rs232(baud=9600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8,restart_wdt) 
 ....................  
 ....................  
-....................  
-.................... int32 lecture(void); 
-.................... int32 dist(void); 
-.................... //int32 limite = 10; 
-.................... //#INT_RDA 
-.................... /* 
-.................... void RDA_isr(void){ 
-.................... limite = lecture(); 
+.................... int32 valeurDist(){ 
+*
+0196:  CLRF   0E
+0198:  CLRF   0D
+019A:  CLRF   0C
+019C:  CLRF   0B
+019E:  CLRF   12
+01A0:  CLRF   11
+01A2:  CLRF   10
+01A4:  CLRF   0F
+....................    float temps=0; 
+....................    int32 dist=0; 
+....................     
+....................    output_high(pin_b7); //début de l’impulsion sur le trigger de la sonde à ultrasons  
+01A6:  BCF    F93.7
+01A8:  BSF    F8A.7
+....................    delay_us(20); //delay_ms(10); 
+01AA:  MOVLW  20
+01AC:  MOVWF  00
+01AE:  DECFSZ 00,F
+01B0:  BRA    01AE
+01B2:  BRA    01B4
+01B4:  NOP   
+....................    output_low(pin_b7); //fin de l’impulsion 
+01B6:  BCF    F93.7
+01B8:  BCF    F8A.7
+....................     
+....................    while(!input(PIN_b3)); //tant que la pin b3/canrx du PIC est à low => reliée au echo de la sonde 
+01BA:  BSF    F93.3
+01BC:  BTFSS  F81.3
+01BE:  BRA    01BA
+....................       set_timer1(0); //mise à zéro du timer 1 
+01C0:  CLRF   FCF
+01C2:  CLRF   FCE
+....................        
+....................    while(input(PIN_b3)); //tant que la pin b3/canrx du PIC est à high 
+01C4:  BSF    F93.3
+01C6:  BTFSC  F81.3
+01C8:  BRA    01C4
+....................       temps=get_timer1(); //récupération du timer 
+01CA:  MOVF   FCE,W
+01CC:  MOVFF  FCF,03
+01D0:  MOVWF  13
+01D2:  MOVFF  FCF,14
+01D6:  BRA    002A
+01D8:  MOVFF  03,0E
+01DC:  MOVFF  02,0D
+01E0:  MOVFF  01,0C
+01E4:  MOVFF  00,0B
+....................        
+....................    dist = temps*0.00344; //calcul de la distance en mm 
+01E8:  MOVFF  0E,16
+01EC:  MOVFF  0D,15
+01F0:  MOVFF  0C,14
+01F4:  MOVFF  0B,13
+01F8:  MOVLW  9F
+01FA:  MOVWF  1A
+01FC:  MOVLW  71
+01FE:  MOVWF  19
+0200:  MOVLW  61
+0202:  MOVWF  18
+0204:  MOVLW  76
+0206:  MOVWF  17
+0208:  BRA    0062
+020A:  MOVFF  03,16
+020E:  MOVFF  02,15
+0212:  MOVFF  01,14
+0216:  MOVFF  00,13
+021A:  BRA    0156
+021C:  MOVFF  03,12
+0220:  MOVFF  02,11
+0224:  MOVFF  01,10
+0228:  MOVFF  00,0F
+....................    //distance = time*340/10000.0 
+....................    return dist; 
+022C:  MOVFF  0F,00
+0230:  MOVFF  10,01
+0234:  MOVFF  11,02
+0238:  MOVFF  12,03
+023C:  GOTO   031C (RETURN)
 .................... } 
-.................... */ 
+....................  
 .................... void main(){ 
 *
 02CE:  CLRF   FF8
@@ -336,7 +408,7 @@ CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 16:04
 ....................    output_high(PIN_B1); 
 02EE:  BCF    F93.1
 02F0:  BSF    F8A.1
-....................    //#define toint(c) ((c & 0x5F) > '9' ? c - '7' : c - '0') //conversion d'un char en int (0,9) 
+....................     
 ....................    setup_timer_0(RTCC_INTERNAL); // 409us (us = microseconde) overflow 
 02F2:  MOVLW  80
 02F4:  MOVWF  FD5
@@ -362,19 +434,22 @@ CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 16:04
 ....................    output_low(PIN_B1); 
 030E:  BCF    F93.1
 0310:  BCF    F8A.1
+....................     
+....................     
 ....................    int32 distance=0; 
 0312:  CLRF   08
 0314:  CLRF   07
 0316:  CLRF   06
 0318:  CLRF   05
+....................     
 ....................    while(true){ 
-....................       distance = dist(); //calcul de la distance 
+....................     
+....................       distance = valeurDist(); //calcul de la distance 
 031A:  BRA    0196
 031C:  MOVFF  03,08
 0320:  MOVFF  02,07
 0324:  MOVFF  01,06
 0328:  MOVFF  00,05
-....................        
 ....................       /* 
 ....................       if(distance<limite){ //si la distance est assez grande 
 ....................          output_low(PIN_B0); //si la sortie est basse led rouge 
@@ -384,9 +459,6 @@ CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 16:04
 ....................          output_toggle(PIN_B0); //la led rouge clignote 
 ....................       } 
 ....................       */ 
-....................        
-....................        
-....................        
 ....................       if(distance <= 153){ //154(base 16) == 100(base 10) 
 032C:  MOVF   08,F
 032E:  BNZ   0358
@@ -411,17 +483,6 @@ CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 16:04
 0350:  RCALL  0004
 0352:  DECFSZ 0B,F
 0354:  BRA    034C
-....................  
-....................          /* 
-....................          while(test%10 != 0){ 
-....................             output_d((test)); 
-....................             test --; 
-....................             if(32%10 == 0){ output_d(0x99); } 
-....................              
-....................             delay_ms(400); 
-....................          } 
-....................          */ 
-....................          //output_d((hexadecimal)); 
 ....................       }else{ 
 0356:  BRA    03D8
 ....................          output_high(PIN_E0); //dist = 155 
@@ -484,111 +545,13 @@ CCS PCH C Compiler, Version 5.008, 5967               02-mai-20 16:04
 03D2:  RCALL  0004
 03D4:  DECFSZ 0B,F
 03D6:  BRA    03CE
-....................       } 
+....................       }       
 03D8:  BRA    031A
-....................        
-....................        
-....................     //printf("%lu\r\n",distance); //envoi du chiffre par le port Comm 
-....................        
 ....................    } 
 .................... } 
-.................... /* 
+....................  
 03DA:  SLEEP 
-.................... int32 lecture(){ 
-....................    char entre[5]; //buffer de cinq caractères 
-....................    int32 sorti=0; 
-....................    int i=0,x=0,y=1; //sorti=int voulu 
-....................    gets(entre); //attend une chaîne de caractères finie par CR carriage return 
-....................    for(x=0;x<5;x++){ //boucle lisant le buffer 
-....................       if(entre[x]=='\r'){break;} //quand le char == \r => fin du int 
-....................    } 
-....................    for(i=x-1;i>0;i--){ //boucle traduisant les char en un int 
-....................       sorti+=toint(entre[i])*y; //la variable sorti est incrémentée du int* dizaine /centaine 
-....................       y*=10; 
-....................    } 
-....................    sorti+=toint(entre[0])*y; //la boucle ne veut pas se finir à zéro alors voilà :'( 
-....................    return sorti; 
-....................    } 
-....................    */ 
-.................... int32 dist(){ 
-*
-0196:  CLRF   0E
-0198:  CLRF   0D
-019A:  CLRF   0C
-019C:  CLRF   0B
-019E:  CLRF   12
-01A0:  CLRF   11
-01A2:  CLRF   10
-01A4:  CLRF   0F
-....................    float time=0; 
-....................    int32 distance=0; 
-....................    output_high(pin_b7); //début de l’impulsion sur le trigger de la sonde à ultrasons 
-01A6:  BCF    F93.7
-01A8:  BSF    F8A.7
-....................     
-....................    delay_us(20); 
-01AA:  MOVLW  20
-01AC:  MOVWF  00
-01AE:  DECFSZ 00,F
-01B0:  BRA    01AE
-01B2:  BRA    01B4
-01B4:  NOP   
-....................    //delay_ms(10); 
-....................    output_low(pin_b7); //fin de l’impulsion 
-01B6:  BCF    F93.7
-01B8:  BCF    F8A.7
-....................    while(!input(PIN_b3)); //tant que la pin b3/canrx du PIC est à low => reliée au echo de la sonde 
-01BA:  BSF    F93.3
-01BC:  BTFSS  F81.3
-01BE:  BRA    01BA
-....................       set_timer1(0); //mise à zéro du timer 1 
-01C0:  CLRF   FCF
-01C2:  CLRF   FCE
-....................    while(input(PIN_b3)); //tant que la pin b3/canrx du PIC est à high 
-01C4:  BSF    F93.3
-01C6:  BTFSC  F81.3
-01C8:  BRA    01C4
-....................       time=get_timer1(); //récupération du timer 
-01CA:  MOVF   FCE,W
-01CC:  MOVFF  FCF,03
-01D0:  MOVWF  13
-01D2:  MOVFF  FCF,14
-01D6:  BRA    002A
-01D8:  MOVFF  03,0E
-01DC:  MOVFF  02,0D
-01E0:  MOVFF  01,0C
-01E4:  MOVFF  00,0B
-....................    distance = time*0.00344; //calcul de la distance 
-01E8:  MOVFF  0E,16
-01EC:  MOVFF  0D,15
-01F0:  MOVFF  0C,14
-01F4:  MOVFF  0B,13
-01F8:  MOVLW  9F
-01FA:  MOVWF  1A
-01FC:  MOVLW  71
-01FE:  MOVWF  19
-0200:  MOVLW  61
-0202:  MOVWF  18
-0204:  MOVLW  76
-0206:  MOVWF  17
-0208:  BRA    0062
-020A:  MOVFF  03,16
-020E:  MOVFF  02,15
-0212:  MOVFF  01,14
-0216:  MOVFF  00,13
-021A:  BRA    0156
-021C:  MOVFF  03,12
-0220:  MOVFF  02,11
-0224:  MOVFF  01,10
-0228:  MOVFF  00,0F
-....................    //distance = time*340/10000.0 
-....................    return distance; 
-022C:  MOVFF  0F,00
-0230:  MOVFF  10,01
-0234:  MOVFF  11,02
-0238:  MOVFF  12,03
-023C:  GOTO   031C (RETURN)
-....................    } 
+....................  
 
 Configuration Fuses:
    Word  1: 2700   RC_IO NOOSCSEN

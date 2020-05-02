@@ -2,7 +2,7 @@
 ROM used:   988/16384 (3%)
             988/16384 (3%) including unused fragments
 
-            1.1 Average locations per line
+            1.2 Average locations per line
             27.4 Average locations per statement
 
 RAM used:   8/1536 (1%) at main() level
@@ -13,34 +13,34 @@ Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  103    36 100  main.c
+   66    36 100  main.c
    26     0   0  ..\..\..\..\Desktop\c\main.h
   766     0   0  ..\..\..\..\Desktop\testCodeC\18F458.h
 ----- -----
-  895    36 Total
+  858    36 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
 0     38   2    1             @delay_ms1
-0    270  14    4   712  6.4  main
-0    142   7   13   282  3.6  @DIV3232
-0    170   9    8   282  3.6  dist
-0     56   3    2             @ITOF
-0    244  12   11             @MULFF
+0    170   9    8   282  3.6  valeurDist
+0     56   3    2   282  3.6  @ITOF
+0    244  12   11   282  3.6  @MULFF
 0     64   3    5             @FTOSD
+0    270  14    4   712  6.4  MAIN
+0    142   7   13             @DIV3232
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               3
+    Functions               4
     Statements              36
-    Comments                189
-    Volume (V)              1625
-    Difficulty (D)          13.0
-    Effort to implement (E) 21086
-    Time to implement (T)   20 minutes
+    Comments                153
+    Volume (V)              2106
+    Difficulty (D)          16.6
+    Effort to implement (E) 35063
+    Time to implement (T)   32 minutes
     Est Delivered Bugs (B)  0
     Cyclomatic Complexity   1
-    Maintainability (MI)    85
+    Maintainability (MI)    95
 
  Segment     Used  Free
 -----------  ----  ----
