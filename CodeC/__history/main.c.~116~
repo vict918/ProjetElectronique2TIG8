@@ -1,6 +1,7 @@
 #include <main.h>
 
 
+
 int32 lecture(void);
 int32 dist(void);
 //int32 limite = 10;
@@ -36,13 +37,9 @@ void main(){
          output_toggle(PIN_B0); //la led rouge clignote
       }
       */
-      
-      
-      
-      if(distance <= 153){ //154(base 16) == 100(base 10)
+      if(distance < 100){
          output_low(PIN_E0);
-         output_d(distance);
-         delay_ms(300);
+         int test = 55;
 
          /*
          while(test%10 != 0){
@@ -55,16 +52,13 @@ void main(){
          */
          //output_d((hexadecimal));
       }else{
-         output_high(PIN_E0); //dist = 155
-         int diz = distance/100; //1.55
-         int unit = (distance - (diz*100))/10;
-         output_d((diz<<4)+unit);
-         delay_ms(300);
+         //output_high(PIN_E0);
+         //output_d(distance/10);
       }
       
-      
+      output_d(distance);
     //printf("%lu\r\n",distance); //envoi du chiffre par le port Comm
-      
+      delay_ms(300);
    }
 }
 /*
@@ -89,8 +83,8 @@ int32 dist(){
    int32 distance=0;
    output_high(pin_b7); //début de l’impulsion sur le trigger de la sonde à ultrasons
    
-   delay_us(20);
-   //delay_ms(10);
+   //delay_us(20);
+   delay_ms(10);
    output_low(pin_b7); //fin de l’impulsion
    while(!input(PIN_b3)); //tant que la pin b3/canrx du PIC est à low => reliée au echo de la sonde
       set_timer1(0); //mise à zéro du timer 1
