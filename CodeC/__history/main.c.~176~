@@ -1,13 +1,6 @@
 #include <main.h>
 
 int32 seuilLimite = 70;
-/*
-utilisation de ce tableau pour 2 raisons :
-   1) Proteus n'allumant parfois pas l'afficher à 7seg, cela permet donc de lui
-   forcer à afficher la valeur voulu (problème dans les fichiers dw de proteus).
-   2) La conversion de décimal à hexadécimal et permet donc un affichage exact
-   de la valeur calculé.
-*/
 int seg [] = {0x0,0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,
                0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,
                0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,
@@ -94,10 +87,14 @@ void main(){
          
       }else{
          output_high(PIN_E0); 
-         
-         int ten = distance/100; 
-         int unit = (distance - (ten*100))/10;
-         output_d(((distance/100)<<4)+unit); //permet de mettre la dizaine à droite et l'unité à coté
+         int ten = distance/100;
+         int unite = (distance - ((ten)*100))/10;
+         output_d(distance/100<<4+unite);
+         /*
+         int diz = distance/100; 
+         int unit = (distance - (diz*100))/10;
+         output_d((diz<<4)+unit);
+         */
          delay_ms(300);
       } 
       
@@ -105,35 +102,27 @@ void main(){
    }
 }
 
-
-/*
-Fonction permettant de prendre la valeur limite envoyé par le java
-*/
 #INT_RDA
 void RDA_isr(void){
-   char reception[4]; //buffer de cinq caractères
-   int32 valeurLimite=0;
-   
-   
-   gets(reception); //C'est ici que nous attendons les char de la valeur attendu
-  
-   int x = 0;
-   while(x < 4){ // Lecture du buffer
-      if(reception[x] == '\r'){
-         break; //Si la fin su char est égale à \r cela veut dire que c'est la fin du int(géré en java)   
-      }
-      x++;
-   }
-   
-   int i=x-1;
-   int j=1; //compteur initialiser à 0
-   while(i > 0){ //i >= 0 Ne marche pas
-      valeurLimite += toint(reception[i])*j;
-      j*=10;
-      i--;
-   }
-   
-   //ajout de la dernière valeur manuellement
-   valeurLimite += toint(reception[0])*j;
-   seuilLimite = valeurLimite;
+   char entre[5]; //buffer de cinq caractères
+   int32 sorti=0;
+      int i=0,x=0,y=1; //sorti=int voulu
+      gets(entre); //attend une chaîne de caractères finie par CR carriage return
+         for(x=0;x<5;x++){ //boucle lisant le buffer
+            if(entre[x]=='\r'){break;} //quand le char == \r => fin du int
+         }
+         for(i=x-1;i>0;i--){ //boucle traduisant les char en un int
+            sorti+=toint(entre[i])*y; //la variable sorti est incrémentée du int* dizaine /centaine
+            y*=10;
+         }
+         sorti+=toint(entre[0])*y; //la boucle ne veut pas se finir à zéro alors voilà :'(
+        
+
+   seuilLimite = sorti;
 }
+
+
+
+
+
+

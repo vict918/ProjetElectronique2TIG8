@@ -127,7 +127,7 @@ void RDA_isr(void){
    
    int i=x-1;
    int j=1; //compteur initialiser à 0
-   while(i > 0){ //i >= 0 Ne marche pas
+   while(i >= 0){ //i >= 0 Ne marche pas
       valeurLimite += toint(reception[i])*j;
       j*=10;
       i--;
@@ -137,3 +137,17 @@ void RDA_isr(void){
    valeurLimite += toint(reception[0])*j;
    seuilLimite = valeurLimite;
 }
+ /*
+  for(i = x-1; i > 0; i--){ //Traduction de la limtie (de char en int grâce à la méthode défini au dessus)
+      valeurLimite += toint(reception[i])*j;
+      j*=10;
+      //
+   }
+   valeurLimite += toint(reception[0])*j; //la boucle ne veut pas se finir à zéro alors voilà :'(    
+   seuilLimite = valeurLimite;
+ */
+
+
+
+
+
