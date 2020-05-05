@@ -1,6 +1,7 @@
 #include <main.h>
 
 int32 lecture(void);
+int32 dist(void);
 int32 limite = 10;
 
 #INT_RDA
@@ -28,7 +29,31 @@ int32 valeurDist(){
    return dist;
 }
 
-
+int conversion (int Decimal)
+{
+   int valeur;
+   int tab[15];
+   int x=0;
+   int i;
+   int reste;
+   int binaire=0;
+   
+   
+   valeur = Decimal; //32
+   
+   while (valeur > 0)
+   {
+      reste = valeur%2 ;//calcul le reste //16
+      tab[x] = reste;
+      x++;
+      valeur = valeur/2;
+   }
+   for(i=x;i--;i>0)
+   {
+      binaire = binaire + tab[i]*10^i;
+   }
+   return binaire ;
+   }
 
 void main(){
    output_high(PIN_B0);
@@ -51,15 +76,15 @@ void main(){
    
       distance = valeurDist(); //calcul de la distance
       
-      if(distance<limite){ //si la distance est assez grande
-         output_low(PIN_B1); //si la sortie est basse led rouge
-         output_high(PIN_B0); //si la sortie est haute led verte
+      if(distance<99){ //si la distance est assez grande
+         output_low(PIN_B0); //si la sortie est basse led rouge
+         output_high(PIN_B1); //si la sortie est haute led verte
       }else{
-         output_low(PIN_B0); //vérifie que la led verte est bien éteinte
-         output_toggle(PIN_B1); //la led rouge clignote
+         output_low(PIN_B1); //vérifie que la led verte est bien éteinte
+         output_toggle(PIN_B0); //la led rouge clignote
       }
       
-      if(distance <= 153){
+      if(distance <= 99){
          if(distance <= 9){
             output_low(PIN_E0);
             output_d(distance);

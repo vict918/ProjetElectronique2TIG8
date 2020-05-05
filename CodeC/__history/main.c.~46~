@@ -52,11 +52,11 @@ void main(){
       distance = valeurDist(); //calcul de la distance
       
       if(distance<limite){ //si la distance est assez grande
-         output_low(PIN_B1); //si la sortie est basse led rouge
-         output_high(PIN_B0); //si la sortie est haute led verte
+         output_low(PIN_B0); //si la sortie est basse led rouge
+         output_high(PIN_B1); //si la sortie est haute led verte
       }else{
-         output_low(PIN_B0); //vérifie que la led verte est bien éteinte
-         output_toggle(PIN_B1); //la led rouge clignote
+         output_low(PIN_B1); //vérifie que la led verte est bien éteinte
+         output_toggle(PIN_B0); //la led rouge clignote
       }
       
       if(distance <= 153){

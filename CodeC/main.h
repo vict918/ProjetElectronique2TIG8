@@ -1,5 +1,5 @@
 #include <18F458.h>
-#device adc=16
+#device ADC=16
 
 #FUSES NOWDT                    //No Watch Dog Timer
 #FUSES WDT128                   //Watch Dog Timer uses 1:128 Postscale
@@ -20,6 +20,6 @@
 #FUSES NOWRTD                   //Data EEPROM not write protected
 #FUSES NOEBTR                   //Memory not protected from table reads
 #FUSES NOEBTRB                  //Boot block not protected from table reads
+#use delay(crystal=20000000)
 
-#use delay(clock=20000000)
 #use rs232(baud=9600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8,restart_wdt)
