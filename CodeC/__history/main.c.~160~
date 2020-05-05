@@ -2,7 +2,7 @@
 
 int32 lecture(void);
 int32 limite = 70;
-int seg [] = {0x0,0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,
+int seg [] = {0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,
                0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,
                0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,
                0x30,0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,
@@ -70,23 +70,39 @@ void main(){
          output_toggle(PIN_B1); //la led rouge clignote
       }
       
-      if(distance <= 100){
+      for(int i = 0; i < sizeof(seg); i++){
+         output_d(seg[i]);
+         delay_ms(500);
+      }
+      
+         
+      /*
+      if(distance <= 153){
+         if(distance <= 9){
+            output_low(PIN_E0);
+            output_d(distance);
+            delay_ms(300);
+         }
+         
          output_low(PIN_E0);
-         output_d(seg[distance]);
-         delay_ms(300);
+         //output_d(distance);
+         output_d(seg[0]);
+         delay_ms(500);
+         output_d(0x99);
+         delay_ms(500);
          
          
          printf("%lu\r\n",distance);
          delay_ms(300);
          
       }else{
-         output_high(PIN_E0); 
-         int diz = distance/100; 
+         output_high(PIN_E0); //dist = 155
+         int diz = distance/100; //1.55
          int unit = (distance - (diz*100))/10;
          output_d((diz<<4)+unit);
          delay_ms(300);
       } 
-      
+      */
       
    }
 }

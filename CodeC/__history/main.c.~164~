@@ -72,6 +72,8 @@ void main(){
       
       if(distance <= 100){
          output_low(PIN_E0);
+         output_d(distance);
+         delay_ms(700);
          output_d(seg[distance]);
          delay_ms(300);
          

@@ -70,23 +70,39 @@ void main(){
          output_toggle(PIN_B1); //la led rouge clignote
       }
       
-      if(distance <= 100){
+      for(int i = 0; i < sizeof(seg); i++){
+         output_d(seg[i]);
+         delay_ms(100);
+      }
+      
+         
+      /*
+      if(distance <= 153){
+         if(distance <= 9){
+            output_low(PIN_E0);
+            output_d(distance);
+            delay_ms(300);
+         }
+         
          output_low(PIN_E0);
-         output_d(seg[distance]);
-         delay_ms(300);
+         //output_d(distance);
+         output_d(seg[0]);
+         delay_ms(500);
+         output_d(0x99);
+         delay_ms(500);
          
          
          printf("%lu\r\n",distance);
          delay_ms(300);
          
       }else{
-         output_high(PIN_E0); 
-         int diz = distance/100; 
+         output_high(PIN_E0); //dist = 155
+         int diz = distance/100; //1.55
          int unit = (distance - (diz*100))/10;
          output_d((diz<<4)+unit);
          delay_ms(300);
       } 
-      
+      */
       
    }
 }
