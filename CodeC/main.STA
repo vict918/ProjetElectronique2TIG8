@@ -1,9 +1,9 @@
 
-ROM used:   1916/16384 (6%)
-            1916/16384 (6%) including unused fragments
+ROM used:   1908/16384 (6%)
+            1908/16384 (6%) including unused fragments
 
             2.1 Average locations per line
-            30.9 Average locations per statement
+            31.3 Average locations per statement
 
 RAM used:   30/1536 (2%) at main() level
             89/1536 (6%) worst case
@@ -13,11 +13,11 @@ Stack size: 31
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  112    62 100  main.c
-   26     0   0  main.h
-  766     0   0  ..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h
+  112    61 100  main.c
+   26     0   0  ..\..\..\..\Desktop\Nouveau dossier (2)\main.h
+  766     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F458.h
 ----- -----
-  904    62 Total
+  904    61 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
@@ -27,21 +27,21 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0     56   1    2             @ITOF
 0    244   6   11             @MULFF
 0     64   2    5   503  8.8  @FTOSD
-0    414  11    4  1079  7.2  MAIN
+0    410  11    4  1048  7.2  MAIN
 0    142   4   13             @DIV3232
 0    170   4   12             @PRINTF_L32U_9600_31766_31767
-0    364   9   18   797 10.6  lecture
+0    360   9   18   765 10.1  lecture
 0     84   2   14   797 10.6  @MUL3232
  Inline         0             @cinit1
 
 Program metrics:
     Functions               6
-    Statements              62
+    Statements              61
     Comments                164
-    Volume (V)              4808
-    Difficulty (D)          41.4
-    Effort to implement (E) 199079
-    Time to implement (T)   3 hours, 4 minutes
+    Volume (V)              4729
+    Difficulty (D)          40.9
+    Effort to implement (E) 193402
+    Time to implement (T)   2 hours, 59 minutes
     Est Delivered Bugs (B)  1
     Cyclomatic Complexity   10
     Maintainability (MI)    147
@@ -51,7 +51,7 @@ Program metrics:
 00000-00002     4  0  
 00004-00006     0  4  
 00008-00094   142  0  
-00096-07FFE  1770  30848  
+00096-07FFE  1762  30856  
 
 
 

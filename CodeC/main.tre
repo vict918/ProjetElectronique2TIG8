@@ -1,5 +1,5 @@
 ÀÄmain
-   ÃÄMAIN  0/414  Ram=4
+   ÃÄMAIN  0/410  Ram=4
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄ@delay_ms1  0/38  Ram=1
    ³  ÃÄvaleurDist  0/170  Ram=8
@@ -15,6 +15,6 @@
    ³  ÃÄ@DIV3232  0/142  Ram=13
    ³  ÀÄ@delay_ms1  0/38  Ram=1
    ÀÄRDA_isr  0/24  Ram=0
-      ÀÄlecture  0/364  Ram=18
+      ÀÄlecture  0/360  Ram=18
          ÃÄ@MUL3232  0/84  Ram=14
          ÀÄ@MUL3232  0/84  Ram=14
