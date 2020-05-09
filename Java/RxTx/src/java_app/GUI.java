@@ -92,7 +92,10 @@ public class GUI implements ActionListener, SerialPortEventListener{
 	
 	/**
 	 * 
-	 * @param port
+	 * Méthode permettant l'ouverture d'une connexion d'un port COM donné
+	 *  
+	 * @param port port à écouter
+	 * 
 	 */
 	public void connexionPort(String port){
 		try {
@@ -108,6 +111,11 @@ public class GUI implements ActionListener, SerialPortEventListener{
 			}
 	}
 	
+	/**
+	 * 
+	 * Méthode permettant la lecture des données arrivant sur le port COM et affichage de ces données dans l'UI. 
+	 * 
+	 */
 	@Override
 	public void serialEvent(SerialPortEvent event) {
 		try {
@@ -119,7 +127,16 @@ public class GUI implements ActionListener, SerialPortEventListener{
 
 		}catch(Exception e) {JOptionPane.showMessageDialog(null, e.toString());}
 	}
-
+	
+	/**
+	 * 
+	 * Lors d'un clic sur le bouton "Envoyer", la valeur introduite dans le champ texte est envoyé au PIC
+	 * afin de définir le seuil au-delà (ou en dessous) duquel l’alerte est déclenchée.
+	 * 
+	 * Pour la connexion au port COM, quatres boutons sont mis à disposition afin de permettre à l'utilisateur
+	 * de choisir entre les ports COM1 à COM4.
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == sendButton) {
