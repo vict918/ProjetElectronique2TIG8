@@ -91,8 +91,7 @@ void main(){
          output_low(PIN_E0);
          
          //output_d(seg[distance]);
-         int ten = distance/10;
-         int unit = (distance - (ten*10));
+         int unit = (distance - ((distance/10)*10));
          output_d(((distance/10)<<4)+unit);         
          
          printf("%lu\r\n",distance);//Envoie de la donnée au code java
@@ -127,7 +126,7 @@ void RDA_isr(void){
   
    int x = 0;
    while(x < 4){ // Lecture du buffer
-      if(reception[x] == '\r'){ //passage à la ligne
+      if(reception[x] == '\r'){
          break; //Si la fin su char est égale à \r cela veut dire que c'est la fin du int(géré en java)   
       }
       x++;

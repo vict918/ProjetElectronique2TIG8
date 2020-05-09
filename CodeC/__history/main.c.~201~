@@ -41,8 +41,8 @@ int32 valeurDist(){
       temps=get_timer1(); //récupération donc du timer (du temps)
      
    
-   dist = temps*0.00344;// Calcule de la distance en sachant que la vitesse du son est de 340m/s
-   return dist; //dist/2 
+   dist = temps*0.00344; // Calcule de la distance en sachant que la vitesse du son est de 340m/s
+   return dist/2;
 }
 
 
@@ -89,11 +89,12 @@ void main(){
        // --> elle représente le point sur le 2éme afficheur 7seg
       if(distance <= 100){
          output_low(PIN_E0);
-         
-         //output_d(seg[distance]);
          int ten = distance/10;
          int unit = (distance - (ten*10));
-         output_d(((distance/10)<<4)+unit);         
+         output_d((ten<<4)+unit);
+         //output_d(seg[distance]);
+         delay_ms(300);
+         
          
          printf("%lu\r\n",distance);//Envoie de la donnée au code java
          delay_ms(300);
@@ -104,8 +105,6 @@ void main(){
          int ten = distance/100; 
          int unit = (distance - (ten*100))/10;
          output_d(((distance/100)<<4)+unit); //permet de mettre la dizaine à gauche et l'unité à coté
-         
-         printf("%lu\r\n",distance);//Envoie de la donnée au code java
          delay_ms(300);
       } 
       
@@ -127,7 +126,7 @@ void RDA_isr(void){
   
    int x = 0;
    while(x < 4){ // Lecture du buffer
-      if(reception[x] == '\r'){ //passage à la ligne
+      if(reception[x] == '\r'){
          break; //Si la fin su char est égale à \r cela veut dire que c'est la fin du int(géré en java)   
       }
       x++;

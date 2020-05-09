@@ -127,7 +127,7 @@ void RDA_isr(void){
   
    int x = 0;
    while(x < 4){ // Lecture du buffer
-      if(reception[x] == '\r'){ //passage à la ligne
+      if(reception[x] == '\r'){
          break; //Si la fin su char est égale à \r cela veut dire que c'est la fin du int(géré en java)   
       }
       x++;
