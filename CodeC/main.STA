@@ -30,20 +30,20 @@ Page ROM  %  RAM   Vol Diff  Functions:
 0    142   3   13             @DIV3232
 0    168   4   12             @PRINTF_L32U_9600_31766_31767
 0    358   8   14   730  9.5  RDA_isr
-0     84   2   14   730  9.5  @MUL3232
+0     84   2   14             @MUL3232
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               4
+    Functions               3
     Statements              61
     Comments                194
-    Volume (V)              3814
-    Difficulty (D)          29.0
-    Effort to implement (E) 110591
-    Time to implement (T)   1 hours, 42 minutes
-    Est Delivered Bugs (B)  1
-    Cyclomatic Complexity   4
-    Maintainability (MI)    42
+    Volume (V)              2705
+    Difficulty (D)          19.5
+    Effort to implement (E) 52791
+    Time to implement (T)   49 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   3
+    Maintainability (MI)    81
 
  Segment     Used  Free
 -----------  ----  ----

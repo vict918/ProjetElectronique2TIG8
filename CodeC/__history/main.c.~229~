@@ -56,7 +56,7 @@ void main(){
    //augmentera tous les 0,4us
    setup_timer_0(RTCC_INTERNAL); //Définit la source pour le timer_0, fixe l'horloge interne comme source
    //augmentera tous les 1.6us
-   setup_timer_1(T1_INTERNAL); //Idem pour le timer_1, régler l'horloge interne comme source
+   setup_timer_1(T1_INTERNAL|T); //Idem pour le timer_1, régler l'horloge interne comme source
    enable_interrupts(GLOBAL);//Permet l'interuption spécifié, 
    setup_low_volt_detect(FALSE);//Règle les niveaux de déclenchement de la tension et aussi le mode
    enable_interrupts(INT_RDA);//RDA = RS232 receive data available (activer le rs232)

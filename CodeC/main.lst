@@ -1,4 +1,4 @@
-CCS PCH C Compiler, Version 5.008, 5967               09-mai-20 13:52
+CCS PCH C Compiler, Version 5.008, 5967               10-mai-20 15:47
 
                Filename:   C:\Users\robin\Documents\GitHub\ProjetElectronique2TIG8\CodeC\main.lst
 
@@ -526,7 +526,7 @@ CCS PCH C Compiler, Version 5.008, 5967               09-mai-20 13:52
 0430:  MOVFF  00,22
 ....................       
 ....................     
-....................    dist = temps*0.00344;// Calcule de la distance en sachant que la vitesse du son est de 340m/s 
+....................    dist = temps*0.00344;// Calcule de la distance en sachant que la vitesse du son est de 340m/s (*0,00344) 
 0434:  MOVFF  25,2D
 0438:  MOVFF  24,2C
 043C:  MOVFF  23,2B

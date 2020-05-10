@@ -35,10 +35,10 @@ int32 valeurDist(){
    output_low(pin_b7); //Fin de l'impulsion
    
    while(!input(PIN_b3)); //tant que la pin b3 est à low (pour attendre que l'impulsion revienne)
-      set_timer1(0); //mise à zéro du timer 1, Initialise l'horloge/compteur timer0. La valeur peut être de 8 bits ou de 16 
+      set_timer0(0); //mise à zéro du timer 1, Initialise l'horloge/compteur timer0. La valeur peut être de 8 bits ou de 16 
       
    while(input(PIN_b3)); //tant que la pin b3 est à high (donc que l'impulsion est revenu)
-      temps=get_timer1(); //récupération donc du timer (du temps)
+      temps=get_timer0(); //récupération donc du timer (du temps)
      
    
    dist = temps*0.00344;// Calcule de la distance en sachant que la vitesse du son est de 340m/s (*0,00344)

@@ -1,7 +1,7 @@
 D G "__PCH__" 0 149 ""5.008""
 D G "__DEVICE__" 0 149 "458"
-D G "__DATE__" 0 149 ""09-mai-20""
-D G "__TIME__" 0 149 ""13:52:30"" "Standard Header file for the PIC18F458 device ////////////////"
+D G "__DATE__" 0 149 ""10-mai-20""
+D G "__TIME__" 0 149 ""15:47:17"" "Standard Header file for the PIC18F458 device ////////////////"
 c L "set_tris_a" 2 5 16 "FUNCTION"
 v L "value" 2 31 "int8" `54 
 f B "set_tris_a" 2 31 "void(int8 value)" `53 

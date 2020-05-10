@@ -41,7 +41,7 @@ int32 valeurDist(){
       temps=get_timer1(); //récupération donc du timer (du temps)
      
    
-   dist = temps*0.00344;// Calcule de la distance en sachant que la vitesse du son est de 340m/s (*0,00344)
+   dist = temps*0.0034;// Calcule de la distance en sachant que la vitesse du son est de 340m/s
    return dist; //dist/2 
 }
 
