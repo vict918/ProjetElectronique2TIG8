@@ -140,7 +140,7 @@ public class GUI implements ActionListener, SerialPortEventListener{
 		try {
 			br = new BufferedReader(new InputStreamReader(portSerie.getInputStream()));
 			String str = br.readLine();
-			result.setText(str);	
+			result.setText(str + " cm");	
 			
 			if((Integer)seuil.getValue() > Integer.parseInt(str)){
 				alerte.setText("Aucune alerte");
