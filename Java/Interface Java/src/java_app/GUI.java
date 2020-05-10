@@ -7,28 +7,46 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+
 import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author Robin Castermane, Igor Vandervelden, Victor Cotton & Rodrigue Mugisha Tuyishime
+ * Groupe Elec 8 
+ *
+ */
 
 public class GUI implements ActionListener, SerialPortEventListener{
 
 	private JFrame window;
 	private JButton sendButton,com1,com2,com3,com4;
 	private SerialPort portSerie;
-	private JTextField champ;
-	private JLabel distance,result;
+	private SpinnerModel seuil;
+	private JSpinner spinner;
+	private JLabel distance,result,alerte;
 	private PrintWriter pw;
 	private BufferedReader br;
 	private CommPortIdentifier numPort;
 	
+	/**
+	 * 
+	 * Construction interface graphique
+	 * 
+	 */
 	public GUI() {
 		window = new JFrame("App Java");
 		window.setSize(600, 600);
@@ -63,8 +81,9 @@ public class GUI implements ActionListener, SerialPortEventListener{
 		sendButton.setFocusPainted(false);
 		sendButton.addActionListener(this);
 		
-		champ = new JTextField();
-		champ.setBounds(225, 150, 150, 30);
+		seuil =  new SpinnerNumberModel(70,0,1000,1);
+		spinner = new JSpinner(seuil);   
+        spinner.setBounds(225,150,150,30);
 		
 		distance = new JLabel("La distance est:");
 		distance.setBounds(250, 225, 300, 50);
@@ -74,7 +93,11 @@ public class GUI implements ActionListener, SerialPortEventListener{
 		result.setBounds(345, 225, 50, 50);
 		result.setForeground(Color.black);
 		
-		window.getContentPane().add(champ);
+		alerte = new JLabel("");
+		alerte.setBounds(245, 185, 150, 50);
+		alerte.setForeground(Color.black);
+		
+		window.getContentPane().add(spinner);
 		window.getContentPane().add(com1);
 		window.getContentPane().add(com2);
 		window.getContentPane().add(com3);
@@ -82,9 +105,17 @@ public class GUI implements ActionListener, SerialPortEventListener{
 		window.getContentPane().add(sendButton);
 		window.getContentPane().add(distance);
 		window.getContentPane().add(result);
+		window.getContentPane().add(alerte);
 		window.setVisible(true);
 	}
 	
+	/**
+	 * 
+	 * Méthode permettant l'ouverture d'une connexion d'un port COM donné
+	 *  
+	 * @param port port à écouter
+	 * 
+	 */
 	public void connexionPort(String port){
 		try {
 			numPort=CommPortIdentifier.getPortIdentifier(port);
@@ -92,34 +123,60 @@ public class GUI implements ActionListener, SerialPortEventListener{
 			portSerie.addEventListener(this);
 			portSerie.notifyOnDataAvailable(true);
 			portSerie.setSerialPortParams(9600, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-			champ.setText("");
 			
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Connexion au port "+ port +" impossible");
 			}
 	}
 	
+	/**
+	 * 
+	 * Méthode permettant la lecture des données arrivant sur le port COM et affichage de ces données dans l'UI. 
+	 * Une alerte est affiché si le seuil est dépassé.
+	 * 
+	 */
 	@Override
 	public void serialEvent(SerialPortEvent event) {
 		try {
 			br = new BufferedReader(new InputStreamReader(portSerie.getInputStream()));
 			String str = br.readLine();
-			result.setText(str);			
-			System.out.println(str);
-			br.close();	
+			result.setText(str);	
+			
+			if((Integer)seuil.getValue() > Integer.parseInt(str)){
+				alerte.setText("Aucune alerte");
+				alerte.setForeground(Color.green);
+			}
+			else if((Integer)seuil.getValue() < Integer.parseInt(str)){
+				alerte.setText("Alerte, seuil dépassé !!");
+				alerte.setForeground(Color.red);
+			}
+			br.close();
 
-		}catch(Exception e) {JOptionPane.showMessageDialog(null, e.toString());}
+		}catch(Exception e) {
+			/*JOptionPane.showMessageDialog(null, e.toString());
+			 * Suite à des difficultés rencontrées, j'ai enlevé l'exception qui ouvrait une fenêtre message toutes les 5s due à une erreur
+			 * dont j'ignore l'origine, ainsi le programme peut fonctionner sans être interrompu constamment. 
+			 * */
+		}
 	}
-
+	
+	/**
+	 * 
+	 * Lors d'un clic sur le bouton "Envoyer", la valeur introduite dans le champ texte est envoyé au PIC
+	 * afin de définir le seuil au-delà (ou en dessous) duquel l’alerte est déclenchée.
+	 * 
+	 * Pour la connexion au port COM, quatres boutons sont mis à disposition afin de permettre à l'utilisateur
+	 * de choisir entre les ports COM1 à COM4.
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == sendButton) {
-			String str = champ.getText() + "\r";
+			String str = seuil.getValue() + "\r";
 			try {
 				pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(portSerie.getOutputStream())), true);
 				pw.print(str);
 				pw.close();
-				champ.setText("");
 			}catch(Exception e) {JOptionPane.showMessageDialog(null, e.toString());}
 		}
 		else if(event.getSource() == com1){
@@ -145,3 +202,4 @@ public class GUI implements ActionListener, SerialPortEventListener{
 	
 
 }
+
